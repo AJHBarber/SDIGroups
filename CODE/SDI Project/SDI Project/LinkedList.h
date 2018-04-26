@@ -20,7 +20,11 @@ public:
 	Node* InsertNode(int index, double x);
 	int FindNode(double x);
 	int DeleteNode(double x);
-	void DisplaList(void);
+	void DisplayList(void);
+	double GetNodeData(int node);
+	int GetListLength();
+	void UpdateData(int index, int newData);
+	Node* GetNode(int index);
 
 private:
 	Node * head;

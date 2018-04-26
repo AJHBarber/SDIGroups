@@ -80,7 +80,7 @@ int List::DeleteNode(double x) {
 	return 0;
 }
 
-void List::DisplaList() {
+void List::DisplayList() {
 	int num = 0;
 	Node* currNode = head;
 	while (currNode != NULL) {
@@ -90,4 +90,57 @@ void List::DisplaList() {
 	}
 	std::cout << "Number of nodes in the list: " << num << std::endl;
 
+}
+
+double List::GetNodeData(int node)
+{
+	//Gets data for node from index
+	Node* currNode = head;
+	int curIndex = 1;
+	while (currNode && curIndex != node) {
+		currNode = currNode->next;
+		curIndex++;
+	}
+	if (currNode) {
+		return curIndex;
+	}
+	return 0;
+}
+
+int List::GetListLength()
+{
+	//Returns length of the current list
+	Node* currNode = head;
+	int curIndex = 1;
+	while (currNode) {
+		currNode = currNode->next;
+		curIndex++;
+	}
+	return curIndex;
+}
+
+void List::UpdateData(int index, int newData)
+{
+	Node* currNode = head;
+	int curIndex = 1;
+	while (currNode && curIndex != index) {
+		currNode = currNode->next;
+		curIndex++;
+	}
+	if (currNode) {
+		currNode->data = newData;
+	}
+}
+
+Node * List::GetNode(int index)
+{
+	//Gets a node based on the index
+	Node* currNode = head;
+	int curIndex = 1;
+	while (currNode && curIndex != index) {
+		currNode = currNode->next;
+		curIndex++;
+	}
+
+	return currNode;
 }
