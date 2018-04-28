@@ -133,9 +133,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\SDI Project\SDI Project\LinkedList.cpp" />
+    <ClCompile Include="..\..\SDI Project\SDI Project\read-write.cpp" />
+    <ClCompile Include="..\..\SDI Project\SDI Project\SelectionSort.cpp" />
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\SDI Project\SDI Project\LinkedList.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
