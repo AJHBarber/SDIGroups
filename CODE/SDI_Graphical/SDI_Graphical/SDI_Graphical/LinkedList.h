@@ -6,11 +6,14 @@
 
 #include <iostream>
 
+
+
 class Node{
 	public:
 		Project project;
 		Node* next;
 };
+
 
 class List {
 	public:

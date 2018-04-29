@@ -138,7 +138,7 @@ void List::UpdateData(int index, Project newProject)
 	}
 }
 
-Node * List::GetNode(int index)
+Node* List::GetNode(int index)
 {
 	//Gets a node based on the index
 	Node* currNode = head;

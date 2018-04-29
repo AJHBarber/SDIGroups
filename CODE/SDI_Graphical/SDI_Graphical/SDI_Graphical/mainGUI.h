@@ -8,6 +8,8 @@
 #include "LinkedList.h"
 
 
+Node* currentProject; 
+
 namespace SDIGraphical {
 
 	using namespace System;
@@ -16,7 +18,7 @@ namespace SDIGraphical {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	
 	/// <summary>
 	/// Summary for mainGUI
 	/// </summary>
@@ -26,6 +28,8 @@ namespace SDIGraphical {
 		mainGUI(void)
 		{
 			InitializeComponent();
+			
+
 			//
 			//TODO: Add the constructor code here
 			//
@@ -406,29 +410,34 @@ namespace SDIGraphical {
 
 		}
 #pragma endregion
-	private: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+	public: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 
-		//vector<Project> allProjects = readAllProjects();
 
-		//contTitle->Text = gcnew String(allProjects[0].title.c_str());
-		//contSummary->Text = gcnew String(allProjects[0].summary.c_str());
-		//contGenre->Text = gcnew String(allProjects[0].genre.c_str());
-		//contReleaseDate->Text = gcnew String(allProjects[0].releaseDate.c_str());
-		//contLocations->Text = gcnew String(allProjects[0].filmingLocations.c_str());
-		//contLanguage->Text = gcnew String(allProjects[0].language.c_str());
-		//contRuntime->Text = gcnew String(to_string(allProjects[0].runTime).c_str());
-		//contKeywords->Text = gcnew String(allProjects[0].keywords.c_str());
-		//contStatus->Text = gcnew String(allProjects[0].status.c_str());
-		//contSales->Text = gcnew String(to_string(allProjects[0].ticketSale).c_str());
+		List* allProjects = readAllProjects();
+
+		currentProject = allProjects->GetNode(1);
+
+		Project viewedProject = currentProject->project;
+
+		contTitle->Text = gcnew String(viewedProject.title.c_str());
+		contSummary->Text = gcnew String(viewedProject.summary.c_str());
+		contGenre->Text = gcnew String(viewedProject.genre.c_str());
+		contReleaseDate->Text = gcnew String(viewedProject.releaseDate.c_str());
+		contLocations->Text = gcnew String(viewedProject.filmingLocations.c_str());
+		contLanguage->Text = gcnew String(viewedProject.language.c_str());
+		contRuntime->Text = gcnew String(to_string(viewedProject.runTime).c_str());
+		contKeywords->Text = gcnew String(viewedProject.keywords.c_str());
+		contStatus->Text = gcnew String(viewedProject.status.c_str());
+		contSales->Text = gcnew String(to_string(viewedProject.ticketSale).c_str());
 
 	}
 	private: System::Void btnUpdate_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		List* allProjects = readAllProjects();
-		int x = 4;
-		Project viewedProject = allProjects->GetNodeData(1);
-	
-		
+
+		currentProject = currentProject->next;
+
+		Project viewedProject = currentProject->project;
 
 		contTitle->Text = gcnew String(viewedProject.title.c_str());
 		contSummary->Text = gcnew String(viewedProject.summary.c_str());
