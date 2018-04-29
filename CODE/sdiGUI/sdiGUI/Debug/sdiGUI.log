@@ -1,3 +1,0 @@
-﻿  MyForm.cpp
-c:\users\jakeh\onedrive\documents\sdi\gui\sdigui\sdigui\myform.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-  sdiGUI.vcxproj -> C:\Users\jakeh\OneDrive\Documents\SDI\GUI\sdiGUI\Debug\sdiGUI.exe

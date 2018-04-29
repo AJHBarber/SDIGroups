@@ -1,0 +1,17 @@
+﻿  stdafx.cpp
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\project.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\project.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\project.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\crew.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\crew.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  addProject.cpp
+  AssemblyInfo.cpp
+  LinkedList.cpp
+  login.cpp
+  mainGUI.cpp
+  registration.cpp
+  SDI_Graphical.cpp
+  Generating Code...
+c:\users\alex8\desktop\sdi_graphical\sdi_graphical\sdi_graphical\linkedlist.cpp(50): warning C4715: 'List::InsertNode': not all control paths return a value
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  SDI_Graphical.vcxproj -> C:\Users\alex8\Desktop\SDI_Graphical\SDI_Graphical\Debug\SDI_Graphical.exe
