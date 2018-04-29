@@ -6,7 +6,9 @@
 #include <iostream>
 #include "project.h"
 #include "LinkedList.h"
-List allProjects;
+
+
+Node* currentProject; 
 
 namespace SDIGraphical {
 
@@ -16,20 +18,19 @@ namespace SDIGraphical {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	
 	/// <summary>
 	/// Summary for mainGUI
 	/// </summary>
 	public ref class mainGUI : public System::Windows::Forms::Form
 	{
 	public:
-		mainGUI()
+		mainGUI(void)
 		{
-			
-			//projects = readAllProjects();
 			InitializeComponent();
-			//
 			
+
+			//
 			//TODO: Add the constructor code here
 			//
 		}
@@ -97,7 +98,6 @@ namespace SDIGraphical {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			
 			this->lblTitle = (gcnew System::Windows::Forms::Label());
 			this->lblSummary = (gcnew System::Windows::Forms::Label());
 			this->lblGenre = (gcnew System::Windows::Forms::Label());
@@ -333,7 +333,6 @@ namespace SDIGraphical {
 			this->btnMaterials->TabIndex = 22;
 			this->btnMaterials->Text = L"Show Materials";
 			this->btnMaterials->UseVisualStyleBackColor = true;
-			this->btnMaterials->Click += gcnew System::EventHandler(this, &mainGUI::btnMaterials_Click);
 			// 
 			// btnUpdate
 			// 
@@ -409,33 +408,36 @@ namespace SDIGraphical {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
-			
 		}
 #pragma endregion
 	public: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
-		List* newList;
 
-		//vector<Project> allProjects = readAllProjects();
 
-		//contTitle->Text = gcnew String(allProjects[0].title.c_str());
-		//contSummary->Text = gcnew String(allProjects[0].summary.c_str());
-		//contGenre->Text = gcnew String(allProjects[0].genre.c_str());
-		//contReleaseDate->Text = gcnew String(allProjects[0].releaseDate.c_str());
-		//contLocations->Text = gcnew String(allProjects[0].filmingLocations.c_str());
-		//contLanguage->Text = gcnew String(allProjects[0].language.c_str());
-		//contRuntime->Text = gcnew String(to_string(allProjects[0].runTime).c_str());
-		//contKeywords->Text = gcnew String(allProjects[0].keywords.c_str());
-		//contStatus->Text = gcnew String(allProjects[0].status.c_str());
-		//contSales->Text = gcnew String(to_string(allProjects[0].ticketSale).c_str());
+		List* allProjects = readAllProjects();
+
+		currentProject = allProjects->GetNode(1);
+
+		Project viewedProject = currentProject->project;
+
+		contTitle->Text = gcnew String(viewedProject.title.c_str());
+		contSummary->Text = gcnew String(viewedProject.summary.c_str());
+		contGenre->Text = gcnew String(viewedProject.genre.c_str());
+		contReleaseDate->Text = gcnew String(viewedProject.releaseDate.c_str());
+		contLocations->Text = gcnew String(viewedProject.filmingLocations.c_str());
+		contLanguage->Text = gcnew String(viewedProject.language.c_str());
+		contRuntime->Text = gcnew String(to_string(viewedProject.runTime).c_str());
+		contKeywords->Text = gcnew String(viewedProject.keywords.c_str());
+		contStatus->Text = gcnew String(viewedProject.status.c_str());
+		contSales->Text = gcnew String(to_string(viewedProject.ticketSale).c_str());
 
 	}
 	private: System::Void btnUpdate_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		allProjects;
-		List* yeet = readAllProjects();
-		Project viewedProject = yeet->GetNodeData(1);
-	
-		
+		List* allProjects = readAllProjects();
+
+		currentProject = currentProject->next;
+
+		Project viewedProject = currentProject->project;
 
 		contTitle->Text = gcnew String(viewedProject.title.c_str());
 		contSummary->Text = gcnew String(viewedProject.summary.c_str());
@@ -526,14 +528,6 @@ private: System::Void btnNewProject_Click(System::Object^  sender, System::Event
 	this->Hide();
 	SDIGraphical::addProject addProjectGUI;
 	addProjectGUI.ShowDialog();
-	this->Show();
-
-}
-private: System::Void btnMaterials_Click(System::Object^  sender, System::EventArgs^  e) {
-
-	this->Hide();
-	SDIGraphical::materialsGUI MaterialsGUIView;
-	MaterialsGUIView.ShowDialog();
 	this->Show();
 
 }
