@@ -97,7 +97,7 @@ void List::DisplayList() {
 
 }
 
-double List::GetNodeData(int node)
+Project List::GetNodeData(int node)
 {
 	//Gets data for node from index
 	Node* currNode = head;
@@ -107,9 +107,10 @@ double List::GetNodeData(int node)
 		curIndex++;
 	}
 	if (currNode) {
-		return curIndex;
+		return currNode->project;
 	}
-	return 0;
+	Project empty;
+	return empty;
 }
 
 int List::GetListLength()
@@ -137,7 +138,7 @@ void List::UpdateData(int index, Project newProject)
 	}
 }
 
-Node * List::GetNode(int index)
+Node* List::GetNode(int index)
 {
 	//Gets a node based on the index
 	Node* currNode = head;

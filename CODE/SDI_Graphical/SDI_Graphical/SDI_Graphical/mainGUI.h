@@ -8,6 +8,8 @@
 #include "LinkedList.h"
 
 
+Node* currentProject; 
+
 namespace SDIGraphical {
 
 	using namespace System;
@@ -16,7 +18,7 @@ namespace SDIGraphical {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	
 	/// <summary>
 	/// Summary for mainGUI
 	/// </summary>
@@ -26,6 +28,8 @@ namespace SDIGraphical {
 		mainGUI(void)
 		{
 			InitializeComponent();
+			
+
 			//
 			//TODO: Add the constructor code here
 			//
@@ -406,37 +410,45 @@ namespace SDIGraphical {
 
 		}
 #pragma endregion
-	private: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+	public: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
 
-		//vector<Project> allProjects = readAllProjects();
 
-		//contTitle->Text = gcnew String(allProjects[0].title.c_str());
-		//contSummary->Text = gcnew String(allProjects[0].summary.c_str());
-		//contGenre->Text = gcnew String(allProjects[0].genre.c_str());
-		//contReleaseDate->Text = gcnew String(allProjects[0].releaseDate.c_str());
-		//contLocations->Text = gcnew String(allProjects[0].filmingLocations.c_str());
-		//contLanguage->Text = gcnew String(allProjects[0].language.c_str());
-		//contRuntime->Text = gcnew String(to_string(allProjects[0].runTime).c_str());
-		//contKeywords->Text = gcnew String(allProjects[0].keywords.c_str());
-		//contStatus->Text = gcnew String(allProjects[0].status.c_str());
-		//contSales->Text = gcnew String(to_string(allProjects[0].ticketSale).c_str());
+		List* allProjects = readAllProjects();
+
+		currentProject = allProjects->GetNode(1);
+
+		Project viewedProject = currentProject->project;
+
+		contTitle->Text = gcnew String(viewedProject.title.c_str());
+		contSummary->Text = gcnew String(viewedProject.summary.c_str());
+		contGenre->Text = gcnew String(viewedProject.genre.c_str());
+		contReleaseDate->Text = gcnew String(viewedProject.releaseDate.c_str());
+		contLocations->Text = gcnew String(viewedProject.filmingLocations.c_str());
+		contLanguage->Text = gcnew String(viewedProject.language.c_str());
+		contRuntime->Text = gcnew String(to_string(viewedProject.runTime).c_str());
+		contKeywords->Text = gcnew String(viewedProject.keywords.c_str());
+		contStatus->Text = gcnew String(viewedProject.status.c_str());
+		contSales->Text = gcnew String(to_string(viewedProject.ticketSale).c_str());
 
 	}
 	private: System::Void btnUpdate_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		Node* head = readAllProjects();
-		Project currentProject = head->project;
+		List* allProjects = readAllProjects();
 
-		contTitle->Text = gcnew String(head->project.title.c_str());
-		contSummary->Text = gcnew String(head->project.summary.c_str());
-		contGenre->Text = gcnew String(head->project.genre.c_str());
-		contReleaseDate->Text = gcnew String(head->project.releaseDate.c_str());
-		contLocations->Text = gcnew String(head->project.filmingLocations.c_str());
-		contLanguage->Text = gcnew String(head->project.language.c_str());
-		contRuntime->Text = gcnew String(to_string(head->project.runTime).c_str());
-		contKeywords->Text = gcnew String(head->project.keywords.c_str());
-		contStatus->Text = gcnew String(head->project.status.c_str());
-		contSales->Text = gcnew String(to_string(head->project.ticketSale).c_str());
+		currentProject = currentProject->next;
+
+		Project viewedProject = currentProject->project;
+
+		contTitle->Text = gcnew String(viewedProject.title.c_str());
+		contSummary->Text = gcnew String(viewedProject.summary.c_str());
+		contGenre->Text = gcnew String(viewedProject.genre.c_str());
+		contReleaseDate->Text = gcnew String(viewedProject.releaseDate.c_str());
+		contLocations->Text = gcnew String(viewedProject.filmingLocations.c_str());
+		contLanguage->Text = gcnew String(viewedProject.language.c_str());
+		contRuntime->Text = gcnew String(to_string(viewedProject.runTime).c_str());
+		contKeywords->Text = gcnew String(viewedProject.keywords.c_str());
+		contStatus->Text = gcnew String(viewedProject.status.c_str());
+		contSales->Text = gcnew String(to_string(viewedProject.ticketSale).c_str());
 
 
 	}
@@ -457,17 +469,20 @@ namespace SDIGraphical {
 
 
 			 //Returns a vector of all projects from the file
-			 Node* readAllProjects() {
+			 List* readAllProjects() {
 
 				 List* allProjects = new List();
 
 				 ifstream projects("projects.txt");
-
+				 int count = 0;
 				 for (string projectInfo; getline(projects, projectInfo);)
 				 {
+					 Project toInsert = readProject(projectInfo);
+					 if (toInsert.title != "") {
+						 allProjects->InsertNode(count, toInsert);
+						 count++;
+					 }
 					
-					 allProjects->InsertNode(0, readProject(projectInfo) );
-
 				 }
 				
 				 /*if (!allProjects->IsEmpty) 
@@ -475,7 +490,7 @@ namespace SDIGraphical {
 					
 				 
 				 }*/
-				 return allProjects->GetNode(0);
+				 return allProjects;
 
 			 }
 
@@ -485,18 +500,21 @@ namespace SDIGraphical {
 			 Project readProject(string fromFile) {
 				 //Title|summary|genre|Date|language|100|71|status|
 				 Project curProject;
-				 vector<string> splitLine = split(fromFile, '|');
+				
+					 vector<string> splitLine = split(fromFile, '|');
+					 if (splitLine.size() == 10) {
+					 curProject.title = splitLine[0];
+					 curProject.summary = splitLine[1];
+					 curProject.genre = splitLine[2];
+					 curProject.releaseDate = splitLine[3];
+					 curProject.language = splitLine[4];
+					 curProject.runTime = stoi(splitLine[5]);
+					 curProject.ticketSale = stoi(splitLine[6]);
+					 curProject.status = splitLine[7];
+					 curProject.filmingLocations = splitLine[8];
+					 curProject.keywords = splitLine[9];
+				 }
 				 
-				 curProject.title = splitLine[0];
-				 curProject.summary = splitLine[1];
-				 curProject.genre = splitLine[2];
-				 curProject.releaseDate = splitLine[3];
-				 curProject.language = splitLine[4];
-				 curProject.runTime = stoi(splitLine[5]);
-				 curProject.ticketSale = stoi(splitLine[6]);
-				 curProject.status = splitLine[7];
-				 curProject.filmingLocations = splitLine[8];
-				 curProject.keywords = splitLine[9];
 
 				 return curProject;
 

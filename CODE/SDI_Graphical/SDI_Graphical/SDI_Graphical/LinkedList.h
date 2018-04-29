@@ -6,11 +6,14 @@
 
 #include <iostream>
 
+
+
 class Node{
 	public:
 		Project project;
 		Node* next;
 };
+
 
 class List {
 	public:
@@ -21,7 +24,7 @@ class List {
 		int FindNode(Project project);
 		int DeleteNode(Project project);
 		void DisplayList(void);
-		double GetNodeData(int node);
+		Project GetNodeData(int node);
 		int GetListLength();
 		void UpdateData(int index, Project project);
 		Node* GetNode(int index);
