@@ -175,6 +175,7 @@ namespace SDIGraphical {
 
 		std::string loginTest = loginUser(username, password);
 
+		
 		if (loginTest != "Invalid") {
 			this->Hide();
 			SDIGraphical::mainGUI homeGUI;

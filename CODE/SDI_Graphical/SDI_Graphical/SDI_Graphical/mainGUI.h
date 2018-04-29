@@ -6,7 +6,7 @@
 #include <iostream>
 #include "project.h"
 #include "LinkedList.h"
-
+List allProjects;
 
 namespace SDIGraphical {
 
@@ -23,10 +23,13 @@ namespace SDIGraphical {
 	public ref class mainGUI : public System::Windows::Forms::Form
 	{
 	public:
-		mainGUI(void)
+		mainGUI()
 		{
+			
+			//projects = readAllProjects();
 			InitializeComponent();
 			//
+			
 			//TODO: Add the constructor code here
 			//
 		}
@@ -94,6 +97,7 @@ namespace SDIGraphical {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			
 			this->lblTitle = (gcnew System::Windows::Forms::Label());
 			this->lblSummary = (gcnew System::Windows::Forms::Label());
 			this->lblGenre = (gcnew System::Windows::Forms::Label());
@@ -329,6 +333,7 @@ namespace SDIGraphical {
 			this->btnMaterials->TabIndex = 22;
 			this->btnMaterials->Text = L"Show Materials";
 			this->btnMaterials->UseVisualStyleBackColor = true;
+			this->btnMaterials->Click += gcnew System::EventHandler(this, &mainGUI::btnMaterials_Click);
 			// 
 			// btnUpdate
 			// 
@@ -404,9 +409,11 @@ namespace SDIGraphical {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
+			
 		}
 #pragma endregion
-	private: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+	public: System::Void mainGUI_Load(System::Object^  sender, System::EventArgs^  e) {
+		List* newList;
 
 		//vector<Project> allProjects = readAllProjects();
 
@@ -424,9 +431,9 @@ namespace SDIGraphical {
 	}
 	private: System::Void btnUpdate_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		List* allProjects = readAllProjects();
-		int x = 4;
-		Project viewedProject = allProjects->GetNodeData(1);
+		allProjects;
+		List* yeet = readAllProjects();
+		Project viewedProject = yeet->GetNodeData(1);
 	
 		
 
@@ -519,6 +526,14 @@ private: System::Void btnNewProject_Click(System::Object^  sender, System::Event
 	this->Hide();
 	SDIGraphical::addProject addProjectGUI;
 	addProjectGUI.ShowDialog();
+	this->Show();
+
+}
+private: System::Void btnMaterials_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	this->Hide();
+	SDIGraphical::materialsGUI MaterialsGUIView;
+	MaterialsGUIView.ShowDialog();
 	this->Show();
 
 }

@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+
 class Node{
 	public:
 		Project project;
@@ -29,5 +30,6 @@ class List {
 	private:
 		Node * head;
 };
+extern List allProjects;
 
 #endif
