@@ -1,0 +1,12 @@
+﻿  stdafx.cpp
+  View.cpp
+c1xx : fatal error C1083: Cannot open source file: 'View.cpp': No such file or directory
+  SDI_Console_Application.cpp
+e:\users\alex\desktop\sdigroups\sdi_console_application\sdi_console_application\model.h(4): fatal error C1083: Cannot open include file: 'userStruct.h': No such file or directory
+  Model.cpp
+e:\users\alex\desktop\sdigroups\sdi_console_application\sdi_console_application\model.h(4): fatal error C1083: Cannot open include file: 'userStruct.h': No such file or directory
+  Material.cpp
+  list.cpp
+  Controller.cpp
+e:\users\alex\desktop\sdigroups\sdi_console_application\sdi_console_application\model.h(4): fatal error C1083: Cannot open include file: 'userStruct.h': No such file or directory
+  Generating Code...
